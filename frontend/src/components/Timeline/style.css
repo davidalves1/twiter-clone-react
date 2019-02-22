@@ -1,0 +1,20 @@
+.new-tweet {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+textarea {
+    outline: none;
+    -moz-outline-style: none;
+    resize: none;
+    box-shadow: 0px 0px 10px 5px rgba(0,144,184,0.5);
+    border-radius: 10px;
+    border-color: #0090b8;
+    margin-top: 1rem;
+}
+
+.twitter-logo {
+    width: 4rem;
+    height: auto;
+    margin: 1rem;
+}

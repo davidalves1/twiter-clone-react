@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { setStorageItem } from '../../utils/localStorage';
 
 import './style.css';
-
 import twitterLogo from '../../images/twitter-logo.png';
 
 export default class Login extends Component {
@@ -10,7 +10,6 @@ export default class Login extends Component {
   };
 
   handleInputChange = (ev) => {
-    console.log(ev.target.value);
     this.setState({ username: ev.target.value });
   }
 
@@ -23,14 +22,14 @@ export default class Login extends Component {
       return;
     }
 
-    localStorage.setItem('@OmniTwitter:username', username);
+    setStorageItem('username', username);
 
     this.props.history.push('/timeline');
   }
 
   render() {
     const { username } = this.state;
-    
+
     return (
       <div className="row">
         <div className="offset-md-4 col-md-4 login-wrapper">
