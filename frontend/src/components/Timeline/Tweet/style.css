@@ -1,0 +1,18 @@
+.tweet-wrap {
+    border-bottom: 1px solid #bbb;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 1rem;
+    min-height: 3rem;
+    padding: 0.5rem;
+    color: #333;
+}
+
+.author {
+    font-size: 0.8rem;
+    line-height: 0;
+}
+
+.content {
+    margin: 0 0.5rem;
+}

@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
+
 import { getStorageItem } from '../../utils/localStorage';
-import api from '../../services/api';
+import tweetsService from '../../services/tweets';
+import Tweet from './Tweet';
 
 import './style.css';
 import twitterLogo from '../../images/twitter-logo.png';
 
 export default class Timeline extends Component {
   state = {
-    newTweet: ''
+    newTweet: '',
+    tweets: [],
+  }
+
+  async componentDidMount() {
+    const tweetsResponse = await tweetsService.index();
+
+    this.setState({ tweets: tweetsResponse.data })
   }
 
   handleInputChange = ev => {
@@ -22,15 +31,16 @@ export default class Timeline extends Component {
     const { newTweet: content } = this.state;
     const author = getStorageItem('username');
 
-    await api.post('tweets', {content, author});
+    await tweetsService.store({content, author});
 
     this.setState({ newTweet: '' });
   }
 
   render() {
-    const { newTweet } = this.state;
+    const { newTweet, tweets } = this.state;
+    console.log(tweets);
     
-    return (  
+    return (
       <div className="row">
         <div className="offset-md-3 col-md-6 new-tweet">
           <img src={twitterLogo} alt="OmniTwitter" className="twitter-logo" />
@@ -41,6 +51,17 @@ export default class Timeline extends Component {
             onChange={this.handleInputChange}
             onKeyDown={this.handleNewTweet}
           />
+        </div>
+
+        <div className="col-md-12 mt-4">
+          {tweets.map(tweet => (
+            <Tweet 
+              key={tweet._id}
+              author={tweet.author}
+              content={tweet.content}
+              likes={tweet.likes} 
+            />
+          ))}
         </div>
       </div>
     );
